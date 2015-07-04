@@ -1,4 +1,5 @@
 %h1=@post.title
+= image_tag @post.image.url(:medium)
 %p=@post.description
 %p=@post.user.email 
 =link_to 'Back', root_path
