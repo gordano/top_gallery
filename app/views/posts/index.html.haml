@@ -1,0 +1,5 @@
+%h1 Top Gallery
+= link_to 'New Post' , new_post_path
+-@post.each do |item|
+	%h2= link_to item.title, item
+	%p= item.description
