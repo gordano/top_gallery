@@ -1,6 +1,24 @@
-%h1 Top Gallery
+#posts.transitions-enabled
+	-@post.each do |item|
+		.box.panel.panel-default
+			= link_to (image_tag item.image.url), item
+			%h2= link_to item.title, item
+			.row.user
+				.col-md
+					Submited by
+					=item.user.email				
+			.row				
+				.col			
+					%span.glyphicon.glyphicon-heart
+						= item.get_upvotes.size
+					%span.glyphicon.glyphicon-comment
+						= item.get_upvotes.size
+				%br
 
--@post.each do |item|
-	%h2= link_to item.title, item
-	= link_to (image_tag item.image.url(:medium)), item
-	%p= item.description
+
+
+				
+			
+			
+  
+					
