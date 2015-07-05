@@ -24,4 +24,14 @@
 								=link_to 'Back', root_path, class: "btn btn-default"
 								=link_to 'Edit', edit_post_path, class: "btn btn-default"
 								=link_to 'Delete', post_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default"
+					.col-md-6#comments
+
+						%h2.comment_count= pluralize(@post.comments.count, "Comment")
+						-@comments.each do |comment|
+							.comment
+								%p.username= comment.user.email
+								%p.comment_content= comment.content
+								- if user_signed_in? && current_user.id == 1		
+									=link_to 'Delete', [@post, comment], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default" 	
+						=render 'comments/form'
 
