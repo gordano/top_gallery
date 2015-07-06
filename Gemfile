@@ -15,6 +15,9 @@ gem 'paperclip', '~> 4.3.0'
 gem 'masonry-rails', '~> 0.2.4'
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -23,5 +26,6 @@ group :development, :test do
   gem 'byebug'  
   gem 'web-console', '~> 2.0'  
   gem 'spring'
+  gem 'letter_opener', '~> 1.4.1'
 end
 

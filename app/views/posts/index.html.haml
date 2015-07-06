@@ -8,17 +8,10 @@
 					Submited by
 					=item.user.email				
 			.row				
-				.col			
-					%span.glyphicon.glyphicon-heart
-						= item.get_upvotes.size
-					%span.glyphicon.glyphicon-comment
-						= item.get_upvotes.size
-				%br
-
-
-
-				
-			
-			
-  
-					
+				.col-md-6.col-md-offset-3
+					.btn-group			
+						= link_to (content_tag :span, item.get_upvotes.size, class: "glyphicon glyphicon-heart comment-font-size"), item, class: "btn btn-default"	
+						= link_to (content_tag :span, item.comments.count, class: "glyphicon glyphicon-comment comment-font-size"), item, class: "btn btn-default"
+						
+					%br
+					%br
