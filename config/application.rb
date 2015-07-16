@@ -25,4 +25,6 @@ module TopGallery
     #For Devise
     #config.assets.initialize_on_precompile = false
   end
+  
+  
 end

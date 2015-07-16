@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   
   resources :posts do
@@ -7,6 +9,10 @@ Rails.application.routes.draw do
       put "like",    to: "posts#upvote"
     end    
   end
+
+scope ":locale", defaults: { locale: I18n.locale } do
+  ActiveAdmin.routes(self)
+end 
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root "posts#index"

@@ -43,4 +43,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener
   Paperclip.options[:command_path] = "/usr/bin/"
+
+
+  config.before_configuration do
+    I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+    I18n.default_locale = :en
+    I18n.reload!
+ end
 end
