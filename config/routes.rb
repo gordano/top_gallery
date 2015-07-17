@@ -10,9 +10,11 @@ Rails.application.routes.draw do
     end    
   end
 
+#### Internatiolisation  - ActiveAdmin BEGIN
 scope ":locale", defaults: { locale: I18n.locale } do
   ActiveAdmin.routes(self)
 end 
+#### Internatiolisation  - ActiveAdmin END
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   root "posts#index"

@@ -251,12 +251,13 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+
+  #### Internatiolisation  - ActiveAdmin BEGIN
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
       menu.add :label => "Languages" do |lang|
-        lang.add :label => "English",:url => proc { url_for(:locale => 'en') }, id: 'i18n-en', :priority => 1
-        lang.add :label => "Mexican",:url => proc { url_for(:locale => 'es') }, id: 'i18n-es', :priority => 2
-        lang.add :label => "Russian",:url => proc { url_for(:locale => 'ru') }, id: 'i18n-es', :priority => 3
+        lang.add :label => "English",:url => proc { url_for(:locale => 'en') }, id: 'i18n-en', :priority => 2        
+        lang.add :label => "Russian",:url => proc { url_for(:locale => 'ru') }, id: 'i18n-ru', :priority => 1
       end
       menu.add :label => proc { display_name current_active_admin_user },
                 :url => '#',
@@ -265,4 +266,5 @@ ActiveAdmin.setup do |config|
       admin.add_logout_button_to_menu menu
     end
   end
+  #### Internatiolisation  - ActiveAdmin END
 end

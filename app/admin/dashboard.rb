@@ -25,7 +25,7 @@ ActiveAdmin.register_page "Dashboard" do
 
 
        column do
-        panel "Info" do
+        panel I18n.t("active_admin_info_dashboard") do
            table_for Post.order("id DESC").limit(10) do
             #column(:payment_type) { |payment| payment.payment_type.titleize }
             column "ID", :id

@@ -44,10 +44,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   Paperclip.options[:command_path] = "/usr/bin/"
 
-
+  #### Internatiolisation  - ActiveAdmin BEGIN
   config.before_configuration do
     I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
-    I18n.default_locale = :en
+    I18n.default_locale = :ru
     I18n.reload!
  end
+  #### Internatiolisation  - ActiveAdmin END
 end
