@@ -38,6 +38,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activeadmin-ckeditor (0.0.19)
+      activeadmin
+      ckeditor
+      paperclip
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -74,6 +78,9 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    ckeditor (4.1.2)
+      cocaine
+      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -252,9 +259,11 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  activeadmin-ckeditor
   acts_as_votable (~> 0.10.0)
   bootstrap-sass (~> 3.3.5.1)
   byebug
+  ckeditor (~> 4.1.2)
   coffee-rails (~> 4.1.0)
   devise (~> 3.5.1)
   haml (~> 4.0.6)

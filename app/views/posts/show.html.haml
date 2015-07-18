@@ -6,8 +6,10 @@
 				= image_tag @post.image.url
 			
 			.panel-body
-				%h1=@post.title				
-				%p=@post.description				
+				%h1=@post.title
+				%p=@post.description
+				%p=#raw(@post.description)			
+							
 				
 			.panel-footer
 				.row
