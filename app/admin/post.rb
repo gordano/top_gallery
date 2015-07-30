@@ -22,11 +22,7 @@ form do |f|
     f.input :description, :as => :ckeditor
   end
 f.actions
-end
-
-
-
-
+end  
 
 
 end

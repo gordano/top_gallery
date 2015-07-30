@@ -157,5 +157,6 @@ ru:
         image_content_type: "Тип изображения"
         image_file_size: "Размер изображения"
         image_updated_at: "Дата обновления"
+        state: "Статус"
 
 
