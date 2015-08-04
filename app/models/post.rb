@@ -9,14 +9,14 @@ class Post < ActiveRecord::Base
     has_many :comments
 
     include AASM
-    #def aasm_state
-  	#	self[:aasm_state] || "moderating"
-	#end
+    def aasm_state
+  		self[:aasm_state] || "moderating"
+	end
 
 
     aasm do
     	state :moderating, :initial => true
-    	state :banned
+    	#state :banned
     	state :approved
 
     	event :approve do
