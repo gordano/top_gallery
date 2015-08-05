@@ -8,12 +8,12 @@ ActiveAdmin.register Post do
         column :description
         column :state do |post|
         	div :class => "aasm_state" do 
-        	post.state if post.state.nil?
-        	p post.state     
+        	post.may_approve? if post.state.nil?
+        	#post.state     
         	end
         end
         column "actions" do |post|
-                if post.state == "moderating"
+                if post.aasm_state == "moderating"
                     div :class => "aasm_state_action-approve" do             
                         link_to("Approve", approve_admin_post_path(post))
                     end

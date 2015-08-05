@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
 
     include AASM
     def aasm_state
-  		self[:aasm_state] || "moderating"
+  		self[:state] || "moderating"
 	end
 
 
