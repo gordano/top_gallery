@@ -8,23 +8,31 @@ class Post < ActiveRecord::Base
     validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
     has_many :comments
 
+    scope :search_post, ->(keyword){where(title: keyword) if keyword.present? && :state == "approved"}
+
     include AASM
-    def aasm_state
-  		self[:state] || "moderating"
-	end
+    #def aasm_state
+    #self[:state] || "moderating"
+    #end
+    #def self.search(keyword)
+    #  if keyword.present?
+    #    where(title: keyword)
+    #  else
+    #    all 
+    #  end
+    #end
 
-
-    aasm do
+	aasm column: 'state' do
     	state :moderating, :initial => true
     	#state :banned
     	state :approved
 
     	event :approve do
-    	  transitions :from => [:moderating], :to => :approved
+    	  transitions from: [:moderating], :to => :approved
     	end
 
     	event :moderate do
-    	  transitions :from => [:approved], :to => :moderating
+    	  transitions from: [:approved], :to => :moderating
     	end
 
   	end

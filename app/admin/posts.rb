@@ -7,18 +7,18 @@ ActiveAdmin.register Post do
 	    column :title  
         column :description
         column :state do |post|
-        	div :class => "aasm_state" do 
+        	div class: "aasm_state" do 
         	post.may_approve? if post.state.nil?
-        	#post.state     
+        	post.state     
         	end
         end
         column "actions" do |post|
-                if post.aasm_state == "moderating"
-                    div :class => "aasm_state_action-approve" do             
+                if post.state == "moderating"
+                    div class: "aasm_state_action-approve" do             
                         link_to("Approve", approve_admin_post_path(post))
                     end
                 else
-                    div :class => "aasm_state_action-moderate" do
+                    div class: "aasm_state_action-moderate" do
                         link_to("Moderate", moderate_admin_post_path(post))  
                     end
                 end           
@@ -28,9 +28,9 @@ ActiveAdmin.register Post do
 
   
 
-    member_action :approve, :method=>:get do       
+    member_action :approve, method: :get do       
     end
-    member_action :moderate, :method=>:get do       
+    member_action :moderate, method: :get do       
     end
 
     controller do
@@ -43,7 +43,7 @@ ActiveAdmin.register Post do
         def moderate
           p "======================================================"
           @post = Post.find params[:id]
-          @post.run!
+          @post.moderate!
           redirect_to admin_posts_path, notice: "Moderate!"          
         end
         

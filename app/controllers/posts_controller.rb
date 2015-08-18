@@ -5,7 +5,9 @@ class PostsController < ApplicationController
 
 
 	def index
-		@post = Post.all.order("created_at DESC")
+		#@post = Post.all.order("created_at DESC")
+		#@post = Post.where(title: params[:keyword])
+		@post = Post.search_post(params[:keyword]).order("created_at DESC")
 	end
 
 	def new
