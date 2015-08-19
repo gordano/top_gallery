@@ -1,13 +1,19 @@
 class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote]
 	before_action :authenticate_user!, except: [:index, :show]
+	
 
 
 
 	def index
+		@post = Post.where(state: "approved").order("created_at DESC")		
 		#@post = Post.all.order("created_at DESC")
 		#@post = Post.where(title: params[:keyword])
-		@post = Post.search_post(params[:keyword]).order("created_at DESC")
+		#@post = Post.search_post(params[:keyword]).order("created_at DESC")
+		
+		if params[:keyword].present?
+			@post = @post.search_post(params[:keyword]).order("created_at DESC")			
+		end		
 	end
 
 	def new
@@ -15,7 +21,11 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@comments = Comment.where(post: @post)
+		if @post
+		  @comments = Comment.where(post: @post)
+		else
+		  redirect_to action: "index"
+		end
 	end
 
 	def update
@@ -47,13 +57,16 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def my_own		
+		@post = Post.where("user_id = ?", current_user.id).all
+	end
+
 	private
-		def post_params
-			
+		def post_params			
 			params.require(:post).permit(:title, :description, :image)
 		end
 		def find_post
-			@post = Post.find(params[:id])
+			post = Post.where(id: params[:id]).first
+			@post = post if post.state == 'approved' 			
 		end
-
 end

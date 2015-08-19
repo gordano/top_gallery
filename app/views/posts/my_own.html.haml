@@ -1,0 +1,16 @@
+#posts.transitions-enabled
+	-@post.each do |item|
+		.box.panel.panel-default
+			= link_to (image_tag item.image.url), item
+			%h2= link_to item.title, item
+			.row.user
+				.col-md.my-post-status
+					Status
+					-if item.state == "approved"
+						%span.approve
+							=item.state
+					-else
+						%span.not_approve
+							=item.state
+								
+			

@@ -164,3 +164,17 @@ textarea {
 a, a:link {
 	text-decoration:none;
 }
+
+.my-post-status{
+	font-size: 15px;	
+	color: #636363;
+
+	span.approve{
+		color:#32A232;
+		font-weight: bold;
+	}
+	span.not_approve{
+		color:#FF8700;
+		font-weight: bold;
+	}
+}
