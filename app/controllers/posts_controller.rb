@@ -29,8 +29,9 @@ class PostsController < ApplicationController
 	end
 
 	def update
+		@post.moderate!
 		if @post.update(post_params)
-			redirect_to @post, notice: "Successfully updated post"
+			redirect_to @post, notice: "Successfully updated post. You post on Moderating!"
 		else
 			render 'edit'
 		end
@@ -66,7 +67,7 @@ class PostsController < ApplicationController
 			params.require(:post).permit(:title, :description, :image)
 		end
 		def find_post
-			post = Post.where(id: params[:id]).first
-			@post = post if post.state == 'approved' 			
+			@post = Post.where(id: params[:id]).where("state = ?",'approved').first
+			#@post = post if post.state == 'approved' 			
 		end
 end

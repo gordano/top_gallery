@@ -1,31 +1,17 @@
-class Post < ActiveRecord::Base
-	#attr_accessible :title, :description
-	
+class Post < ActiveRecord::Base	
 
 	acts_as_votable
 	belongs_to :user
 	has_attached_file :image, styles:{ medium: "300x300>", }
-    validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-    has_many :comments, dependent: :destroy
-
-    #scope :search_post, ->(keyword){where(title: keyword) if keyword.present?}
+    validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/    
+    has_many :comments, dependent: :destroy    
     scope :search_post, ->(keyword){where('title LIKE ?', "%#{keyword.downcase}%") if keyword.present?}
 
     include AASM
-    #def aasm_state
-    #self[:state] || "moderating"
-    #end
-    #def self.search(keyword)
-    #  if keyword.present?
-    #    where(title: keyword)
-    #  else
-    #    all 
-    #  end
-    #end
+    
 
 	aasm column: 'state' do
-    	state :moderating, :initial => true
-    	#state :banned
+    	state :moderating, :initial => true    	
     	state :approved
 
     	event :approve do
@@ -38,6 +24,9 @@ class Post < ActiveRecord::Base
 
   	end
 
+    def to_moderate
+        self.moderate! unless self.moderating?
+    end 
     #aasm_column :state
     #assm_initial_state :new
 
