@@ -1,32 +1,33 @@
-class Post < ActiveRecord::Base	
+class Post < ActiveRecord::Base  
 
-	acts_as_votable
-	belongs_to :user
-	has_attached_file :image, styles:{ medium: "300x300>", }
-    validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/    
-    has_many :comments, dependent: :destroy    
-    scope :search_post, ->(keyword){where('title LIKE ?', "%#{keyword.downcase}%") if keyword.present?}
+  acts_as_votable
+  belongs_to :user
+  has_attached_file :image, styles:{ medium: "300x300>", }
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/    
+  has_many :comments, dependent: :destroy    
+  scope :search_post, ->(keyword){where('keywords LIKE ?', "%#{keyword.downcase}%") if keyword.present?}
+  before_save :set_keywords
 
-    include AASM
+  include AASM
     
 
-	aasm column: 'state' do
-    	state :moderating, :initial => true    	
-    	state :approved
+  aasm column: 'state' do
+    state :moderating, :initial => true      
+    state :approved
 
-    	event :approve do
-    	  transitions from: [:moderating], :to => :approved
-    	end
+    event :approve do
+      transitions from: [:moderating], :to => :approved
+    end
 
-    	event :moderate do
-    	  transitions from: [:approved], :to => :moderating
-    	end
+    event :moderate do
+      transitions from: [:approved], :to => :moderating
+    end
 
-  	end
-
-    def to_moderate
-        self.moderate! unless self.moderating?
-    end 
+  end
+    protected
+      def set_keywords
+        self.keywords = title.downcase
+      end 
     #aasm_column :state
     #assm_initial_state :new
 
@@ -36,13 +37,13 @@ class Post < ActiveRecord::Base
     #assm_state :banned
     
     #assm_event :moderate do
-    #	transitions :to => :moderating, from => [:new]    	
+    #  transitions :to => :moderating, from => [:new]      
     #end
     #assm_event :approve do 
-    #	transitions :to => :approved, from => [:moderating, :banned]    	
+    #  transitions :to => :approved, from => [:moderating, :banned]      
     #end
 
     #assm_event :ban do 
-    #	transitions :to => :banned, from => [:moderating]    	
+    #  transitions :to => :banned, from => [:moderating]      
     #end
 end

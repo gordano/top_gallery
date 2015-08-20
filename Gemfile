@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'activeadmin', github: 'activeadmin'
 #gem "meta_search", '>= 1.1.0.pre'
 gem 'aasm', '~> 4.2.0'
+gem 'seed_dump'
 
 
 gem 'haml', '~> 4.0.6'

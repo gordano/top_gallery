@@ -1,37 +1,37 @@
 !!! 5
 %html
 %head
-	%title Top Gallery
-	= stylesheet_link_tag    'application', media: 'all'
-	= javascript_include_tag 'application'
-	= csrf_meta_tags 
+  %title Top Gallery
+  = stylesheet_link_tag    'application', media: 'all'
+  = javascript_include_tag 'application'
+  = csrf_meta_tags 
 %body
-	= debug(params) if Rails.env.development?
-	%nav.navbar.navbar-default
-		.container
-			.nav.navbar-nav.navbar-right
-				%form.navbar-form{role: "search"}
-					.input-group
-						%input.form-control{name: "keyword", placeholder: "Search", type:"text", value:params[:keyword]}
-							.input-group-btn
-								%button.btn.btn-default{:type => "submit"}
-									%i.glyphicon.glyphicon-search
+  = debug(params) if Rails.env.development?
+  %nav.navbar.navbar-default
+    .container
+      .nav.navbar-nav.navbar-right
+        %form.navbar-form{role: "search"}
+          .input-group
+            %input.form-control{name: "keyword", placeholder: "Search", type:"text", value:params[:keyword]}
+              .input-group-btn
+                .btn.btn-default{type:"submit"}
+                  %i.glyphicon.glyphicon-search
 
-			.navbar-brand= link_to "Top Gallery", root_path
-			- if user_signed_in?
-				%ul.nav.navbar-nav.navbar-right
-					%li= link_to "New Post", new_post_path
-					%li= link_to "My posts", own_posts_path
-					%li= link_to "Account", edit_user_registration_path
-					%li= link_to "Signed Out", destroy_user_session_path, method: :delete
-			- else
-				%ul.nav.navbar-nav.navbar-right
-					%li= link_to "Signed In", new_user_session_path
-					%li= link_to "Sign Up", new_user_registration_path
+      .navbar-brand= link_to "Top Gallery", root_path
+      - if user_signed_in?
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "New Post", new_post_path
+          %li= link_to "My posts", own_posts_path
+          %li= link_to "Account", edit_user_registration_path
+          %li= link_to "Signed Out", destroy_user_session_path, method: :delete
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "Signed In", new_user_session_path
+          %li= link_to "Sign Up", new_user_registration_path
 
-			
-	.container
-		
-		- flash.each do |name,msg|
-			= content_tag :div, msg, class: "alert alert-info"		
-		=yield
+      
+  .container
+    
+    - flash.each do |name,msg|
+      = content_tag :div, msg, class: "alert alert-info"    
+    =yield

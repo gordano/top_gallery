@@ -1,17 +1,17 @@
 #posts.transitions-enabled
-	-@post.each do |item|
-		.box.panel.panel-default
-			= link_to (image_tag item.image.url), item
-			%h2= link_to item.title, item
-			.row.user
-				.col-md
-					Submited by
-					=item.user.email				
-			.row				
-				.col-md-6.col-md-offset-3
-					.btn-group			
-						= link_to (content_tag :span, item.get_upvotes.size, class: "glyphicon glyphicon-heart comment-font-size"), item, class: "btn btn-default"	
-						= link_to (content_tag :span, item.comments.count, class: "glyphicon glyphicon-comment comment-font-size"), item, class: "btn btn-default"
-						
-					%br
-					%br
+  -@post.each do |item|
+    .box.panel.panel-default
+      = link_to (image_tag item.image.url), item
+      %h2= link_to item.title, item
+      .row.user
+        .col-md
+          Submited by
+          =item.user.email
+      .row
+        .col-md-6.col-md-offset-3
+          .btn-group
+            = link_to (content_tag :span, item.get_upvotes.size, class: "glyphicon glyphicon-heart comment-font-size"), item, class: "btn btn-default"
+            = link_to (content_tag :span, item.comments.count, class: "glyphicon glyphicon-comment comment-font-size"), item, class: "btn btn-default"
+            
+          %br
+          %br
